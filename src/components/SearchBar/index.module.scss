@@ -1,0 +1,26 @@
+.container {
+  height: 60px;
+  padding: 5px 30px;
+  background-color: #454545;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  .input {
+    width: 50%;
+    height: 40px;
+    margin: 0 10px;
+    background-color: #313131;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+  }
+  .searchButton {
+    background-color: #e71d36;
+    padding: 5px 45px;
+    height: 40px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+  }
+}
