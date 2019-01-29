@@ -22,7 +22,7 @@ const dropDownOptions = [
 ];
 
 class SearchBar extends Component {
-  onChange = async ({ target: { value }}) => {
+  onChange = ({ target: { value }}) => {
     this.props.onChangeSearch(value);
   }
 
@@ -32,18 +32,19 @@ class SearchBar extends Component {
   }
 
   render() {
+    const { currentSearch, currentFilter, onChangeFilter } = this.props;
     return (
       <div className={styles.container}>
         <input
          className={styles.input}
          type="text"
          placeholder="Type search here"
-         value={ this.props.currentSearch || '' }
+         value={ currentSearch || '' }
          onChange={this.onChange}
         />
         <DropDown
-          selected={this.getFilterTitle(this.props.currentFilter)}
-          onSelect={this.props.onChangeFilter}
+          selected={currentFilter ? this.getFilterTitle(currentFilter) : null }
+          onSelect={onChangeFilter}
           options={dropDownOptions}
         />
         <button

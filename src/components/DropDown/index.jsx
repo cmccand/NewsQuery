@@ -48,11 +48,16 @@ class DropDown extends Component {
     }
   }
 
+  renderDownArrow = () => (
+    <div className={styles.downArrow} />
+  )
+
   render() {
     return (
       <div className={styles.container}>
         <div className={styles.selected} onClick={this.toggleDropDown}>
-          <span>{ this.props.selected }</span>
+          <span>{ this.props.selected || 'Sort Articles' }</span>
+          <span>{ this.renderDownArrow() }</span>
         </div>
         { this.showDropDown() }
       </div>
@@ -74,5 +79,5 @@ DropDown.propTypes = {
 };
 
 DropDown.defaultProps = {
-  selected: 'Selected'
+  selected: 'Filter'
 };

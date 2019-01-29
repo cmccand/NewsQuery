@@ -8,6 +8,9 @@ import Preview from '../Preview';
 // Third-party
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
+// Utilities
+import { debounce } from '../../utils/Debounce';
+
 // styles
 import styles from './index.module.scss';
 
@@ -29,7 +32,7 @@ class MainPage extends Component {
     }
   }
 
-  fetchArticles = async (q, filter) => {
+  fetchArticles = debounce(async (q, filter) => {
     try {
       let url = `${searchUrl}?q=${q}&language=en`;
       if (filter) { url = `${url}&sortBy=${filter}`; }
@@ -45,9 +48,9 @@ class MainPage extends Component {
       const { articles } = await resp.json();
       this.storeArticles(articles);
     } catch (err) {
-      console.log('error', err)
+      throw err;
     }
-  }
+  }, 500)
 
   onChangeSearch = q => {
     this.props.onChangeQ(q);
@@ -57,9 +60,11 @@ class MainPage extends Component {
   }
 
   onChangeFilter = filter => {
-    this.props.onChangeSortBy(filter);
-    if (filter) {
-      this.fetchArticles(this.props.q, filter);
+    if (this.props.q) {
+      this.props.onChangeSortBy(filter);
+      if (filter) {
+        this.fetchArticles(this.props.q, filter);
+      }
     }
   }
 
