@@ -23,7 +23,7 @@ const urlPropsQueryConfig = {
 class MainPage extends Component {
   state = {
     articles: null,
-    loading: true
+    loading: false
   }
 
   componentDidMount() {
