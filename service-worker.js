@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/cmccand/NewsQuery/precache-manifest.21ceb713a7cd102540b85fe19d83c458.js"
+  "/NewsQuery/precache-manifest.35df65b1976162c8f4548108222256cd.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/cmccand/NewsQuery/index.html", {
+workbox.routing.registerNavigationRoute("/NewsQuery/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
