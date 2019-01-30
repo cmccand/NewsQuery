@@ -85,7 +85,7 @@ class MainPage extends Component {
     if (!this.state.articles) {
       return (
         <div className={styles.empty}>
-          <p>Type above to being your search.</p>
+          <p>Type above to begin your search.</p>
         </div>
       );
     }
