@@ -29,7 +29,7 @@ class MainPage extends Component {
   componentDidMount() {
     const { q, sortBy } = this.props;
     if (q || sortBy) {
-      this.fetchArticles(q);
+      this.fetchArticles(q, sortBy);
     }
   }
 
