@@ -35,23 +35,22 @@ class SearchBar extends Component {
     const { currentSearch, currentFilter, onChangeFilter } = this.props;
     return (
       <div className={styles.container}>
-        <input
-         className={styles.input}
-         type="text"
-         placeholder="Type search here"
-         value={ currentSearch || '' }
-         onChange={this.onChange}
-        />
-        <DropDown
-          selected={currentFilter ? this.getFilterTitle(currentFilter) : null }
-          onSelect={onChangeFilter}
-          options={dropDownOptions}
-        />
-        <button
-          className={styles.searchButton}
-        >
-          Search
-        </button>
+        <div className={styles.innerContainer}>
+          <input
+           className={styles.input}
+           type="text"
+           placeholder="Type search here"
+           value={ currentSearch || '' }
+           onChange={this.onChange}
+          />
+          <div className={styles.dropDownContainer}>
+            <DropDown
+              selected={currentFilter ? this.getFilterTitle(currentFilter) : null }
+              onSelect={onChangeFilter}
+              options={dropDownOptions}
+            />
+          </div>
+        </div>
       </div>
     );
   }

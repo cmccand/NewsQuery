@@ -22,7 +22,8 @@ const urlPropsQueryConfig = {
 
 class MainPage extends Component {
   state = {
-    articles: null
+    articles: null,
+    loading: true
   }
 
   componentDidMount() {
@@ -33,6 +34,7 @@ class MainPage extends Component {
   }
 
   fetchArticles = debounce(async (q, filter) => {
+    this.setState({ loading: true });
     try {
       let url = `${searchUrl}?q=${q}&language=en`;
       if (filter) { url = `${url}&sortBy=${filter}`; }
@@ -46,8 +48,13 @@ class MainPage extends Component {
         }
       );
       const { articles } = await resp.json();
-      this.storeArticles(articles);
+      this.setState({
+        articles,
+        loading: false
+      });
+      // this.storeArticles(articles);
     } catch (err) {
+      this.setState({ loading: false });
       throw err;
     }
   }, 500)
@@ -60,19 +67,30 @@ class MainPage extends Component {
   }
 
   onChangeFilter = filter => {
+    this.props.onChangeSortBy(filter);
     if (this.props.q) {
-      this.props.onChangeSortBy(filter);
       if (filter) {
         this.fetchArticles(this.props.q, filter);
       }
     }
   }
 
-  storeArticles = articles => this.setState({ articles })
+  renderLoadingMessage = () => (
+    <div className={styles.empty}>
+      <p>Loading articles ...</p>
+    </div>
+  )
 
-  renderArticles = () => (
-    this.state.articles
-      ? (
+  renderArticles = () => {
+    if (!this.state.articles) {
+      return (
+        <div className={styles.empty}>
+          <p>Type above to being your search.</p>
+        </div>
+      );
+    }
+    if (this.state.articles && this.state.articles.length) {
+      return (
         <div className={styles.articles}>
           {
             this.state.articles.map(
@@ -82,9 +100,14 @@ class MainPage extends Component {
             )
           }
         </div>
-      )
-      : false
-  )
+      );
+    }
+    return (
+      <div className={styles.empty}>
+        <p>No results. Please try another search.</p>
+      </div>
+    );
+  }
 
   render() {
     return (
@@ -96,7 +119,9 @@ class MainPage extends Component {
           storeArticles={this.storeArticles}
           onChangeSearch={this.onChangeSearch}
         />
-        { this.renderArticles() }
+      <div className={styles.articleContainer}>
+          { this.state.loading ? this.renderLoadingMessage() : this.renderArticles() }
+        </div>
       </div>
     );
   }

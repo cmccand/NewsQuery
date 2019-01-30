@@ -14,7 +14,7 @@ const Preview = ({ article }) => (
         {article.description}
       </p>
       <button className={styles.button}>
-        <a href={article.url} className={styles.link}>Read More</a>
+        <a target="_blank" href={article.url} className={styles.link}>Read More</a>
       </button>
     </div>
   </div>

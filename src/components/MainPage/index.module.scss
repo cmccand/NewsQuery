@@ -1,7 +1,33 @@
 .articles {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 40px;
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.articleContainer {
   background-color: #edecec;
+  overflow: auto;
+}
+
+.empty {
+  margin: 0 auto;
+  margin-top: 150px;
+  text-align: center;
+  min-height: 90vh;
+  p {
+    margin: 0;
+    font-size: 36px;
+  }
+}
+
+// Tablet & below
+@media screen and (max-width: 1024px) {
+  .articles {
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 0;
+  }
 }
